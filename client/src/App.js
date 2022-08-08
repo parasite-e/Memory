@@ -5,9 +5,18 @@ import Form from './components/Form/Form.js'
 import useStyles from './styles'
 
 import memories from './images/memories.png';
+import { useDispatch } from 'react-redux';
+import { useEffect } from 'react';
+import { getPost } from './actions/posts';
 
 function App() {
   const classes = useStyles();
+
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getPost());
+  }, [dispatch])
+
   return (
     <Container maxWidth='lg'>
       <AppBar className={classes.appBar} position='static' color='inherit'>
@@ -16,7 +25,7 @@ function App() {
       </AppBar>
       <Grow in>
         <Container>
-          <Grid container justify="space-between" alignItems="stretch" spacing={3}>
+          <Grid container justifyContent="space-between" alignItems="stretch" spacing={3}>
             <Grid item xl={12} sm={7}>
               <Posts></Posts>
             </Grid>
