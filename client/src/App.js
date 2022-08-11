@@ -6,16 +6,18 @@ import useStyles from './styles'
 
 import memories from './images/memories.png';
 import { useDispatch } from 'react-redux';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { getPost } from './actions/posts';
 
 function App() {
   const classes = useStyles();
 
+  const [currentId, setCurrentId] = useState(null);
+
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(getPost());
-  }, [dispatch])
+  }, [currentId, dispatch])
 
   return (
     <Container maxWidth='lg'>
@@ -27,10 +29,10 @@ function App() {
         <Container>
           <Grid container justifyContent="space-between" alignItems="stretch" spacing={3}>
             <Grid item xl={12} sm={7}>
-              <Posts></Posts>
+              <Posts setCurrentId={setCurrentId}></Posts>
             </Grid>
             <Grid item xl={12} sm={4}>
-              <Form></Form>
+              <Form currentId={currentId} setCurrentId={setCurrentId}></Form>
             </Grid>
           </Grid>
         </Container>
